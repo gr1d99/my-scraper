@@ -11,6 +11,14 @@
   </head>
 
   <body>
-    <%= yield %>
+    <div class="container">
+      <% if flash[:message] %>
+        <div class="alert alert-dismissible alert-success mt-5">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <strong>Success!</strong> <%= flash[:message] %>.
+        </div>
+      <% end %>
+      <%= yield %>
+    </div>
   </body>
 </html>

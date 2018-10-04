@@ -8,15 +8,15 @@
   </div>
   <div class="card text-white bg-light mb-3 mt-5">
     <div class="card-body">
-      <%= form_tag do %>
+      <%= form_tag(scrape_links_path, name: 'links-scraper-form') do %>
         <div class="form-group">
           <%= label_tag(:email) %>
-          <%= text_field_tag(:email, nil, type: 'email', placeholder: 'you@example.com', class: 'form-control') %>
+          <%= text_field_tag(:email, nil, type: 'email', placeholder: 'you@example.com', class: 'form-control', required: true) %>
         </div>
 
         <div class="form-group">
           <%= label_tag(:url) %>
-          <%= text_field_tag(:url, nil, placeholder: 'target url', class: 'form-control') %>
+          <%= text_field_tag(:url, nil, placeholder: 'target url', class: 'form-control', required: true) %>
         </div>
 
         <%= submit_tag(:'fetch me all links', class: 'btn btn-primary') %>

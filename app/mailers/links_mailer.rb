@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 class LinksMailer < ApplicationMailer
-  default from: 'test_admin@example.com',
-          subject: 'Scraped links results'
+  default subject: 'Scraped links results'
 
   def send_results
     @to = params[:to]

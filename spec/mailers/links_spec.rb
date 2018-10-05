@@ -15,7 +15,7 @@ RSpec.describe LinksMailer, type: :mailer do
     it 'renders the headers' do
       expect(mail.subject).to eq('Scraped links results')
       expect(mail.to).to eq(['test_user@example.com'])
-      expect(mail.from).to eq(['test_admin@example.com'])
+      expect(mail.from).to eq(['no-reply@example.com'])
     end
 
     it 'renders body' do

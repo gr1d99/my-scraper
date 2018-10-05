@@ -19,11 +19,12 @@ class GenerateLinksResultsService
   attr_reader :links, :storage_path
 
   def generate
+    link_file = "#{storage_path}links.txt"
     FileUtils.mkdir_p(storage_path) unless File.exist?(storage_path)
     File.open("#{storage_path}links.txt", 'w+') do |f|
       links.each { |link| f.puts(link.values.join(': ')) }
     end
 
-    "#{storage_path}links.txt"
+    link_file if File.exist?(link_file)
   end
 end

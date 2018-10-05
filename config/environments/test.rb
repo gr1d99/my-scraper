@@ -44,4 +44,8 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
   config.action_mailer.delivery_method = :test
+  config.action_mailer.default_options = {
+    from: 'no-reply@example.com'
+  }
+  config.active_job.queue_adapter = :sidekiq
 end

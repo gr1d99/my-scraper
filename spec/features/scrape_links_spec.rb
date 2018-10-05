@@ -4,6 +4,8 @@ require 'rails_helper'
 
 feature 'scraping links process' do
   let(:form_xpath) { ".//form[@name='links-scraper-form']" }
+  let(:url) { 'https://example.com/links.html' }
+  let(:body) { File.read("#{scraper_test_files_path}links.html") }
 
   before { visit(root_path) }
 
@@ -19,14 +21,19 @@ feature 'scraping links process' do
   end
 
   scenario 'user submits links scraping request' do
-    within(:xpath, form_xpath) do
-      fill_in('Email', with: 'test@example.com')
-      fill_in('Url', with: 'localhost.com')
-      click_on('fetch me all links')
-    end
+    perform_enqueued_jobs do
+      stub_custom_request(url: url, body: body)
 
-    expect(page).to have_content(
-      'We will notify and send you all links via the email you provided shortly'
-    )
+      within(:xpath, form_xpath) do
+        fill_in('Email', with: 'test@example.com')
+        fill_in('Url', with: url)
+        click_on('fetch me all links')
+      end
+
+      expect(page).to have_content(
+        'We will notify and send you all links via the email you provided shortly'
+      )
+
+    end
   end
 end

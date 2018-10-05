@@ -2,8 +2,13 @@
 
 class ScrapeController < ApplicationController
   def scrape_links
+    GenerateLinksResultsJob.perform_later(
+      url: link_params[:url],
+      email: link_params[:email]
+    )
     flash['message'] =
       'We will notify and send you all links via the email you provided shortly'
+
     redirect_to root_path
   end
 

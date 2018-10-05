@@ -6,7 +6,7 @@ RSpec.describe NokogiriService, type: :service do
   describe '.call' do
     let(:valid_file) { File.read("#{scraper_test_files_path}links.html") }
 
-    it 'returns a fragment document'do
+    it 'returns a fragment document' do
       stub_custom_request(
         url: 'http://example.com/links.html',
         body: valid_file

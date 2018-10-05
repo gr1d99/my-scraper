@@ -33,7 +33,6 @@ feature 'scraping links process' do
       expect(page).to have_content(
         'We will notify and send you all links via the email you provided shortly'
       )
-
     end
   end
 end

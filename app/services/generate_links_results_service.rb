@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'csv'
+
 class GenerateLinksResultsService
   def initialize(links:)
     @links = links
@@ -19,10 +21,15 @@ class GenerateLinksResultsService
   attr_reader :links, :storage_path
 
   def generate
-    link_file = "#{storage_path}links.txt"
+    link_file = "#{storage_path}links.csv"
     FileUtils.mkdir_p(storage_path) unless File.exist?(storage_path)
-    File.open("#{storage_path}links.txt", 'w+') do |f|
-      links.each { |link| f.puts(link.values.join(': ')) }
+    index = 1
+    CSV.open("#{storage_path}links.csv", 'wb') do |csv|
+      csv << %i[No Name Link]
+      links.each do |link|
+        csv << [index, link[:name], link[:url]]
+        index += 1
+      end
     end
 
     link_file if File.exist?(link_file)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe GenerateLinksResultsJob, type: :job do
@@ -26,10 +28,10 @@ RSpec.describe GenerateLinksResultsJob, type: :job do
         ).with(url: url, email: email)
     end
 
-    it 'generates results.txt file' do
+    it 'generates links.csv file' do
       perform_enqueued_jobs do
         job
-        expect(File.exist?("#{storage_path}links.txt")).to be_truthy
+        expect(File.exist?("#{storage_path}links.csv")).to be_truthy
       end
     end
   end

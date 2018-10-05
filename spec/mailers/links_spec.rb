@@ -8,7 +8,8 @@ RSpec.describe LinksMailer, type: :mailer do
     let(:mail) do
       described_class.with(
         to: 'test_user@example.com',
-        filepath: filepath).send_results.deliver
+        filepath: filepath
+      ).send_results.deliver
     end
     let(:attachments) { mail.attachments }
 
